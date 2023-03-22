@@ -1,0 +1,7 @@
+{
+  "name": "msu_eklas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}
