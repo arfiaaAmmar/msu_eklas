@@ -33,7 +33,7 @@ const Navbar = () => {
           </Link>
           <Link
             key={1}
-            to="/Student"
+            to="/student"
             onClick={() => setPage('/student')}
             className="m-auto text-center w-full"
           >
