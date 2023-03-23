@@ -1,17 +1,16 @@
-import CourseRegistration from '../pages/Student/Curriculum/CourseRegistration/CourseRegistration';
-import Curriculum from "../pages/Student/Curriculum/Curriculum";
-import LearningResources from '../pages/Student/Curriculum/LearningResources/LearningResources';
-import TaskManager from "../pages/Student/TaskManager/TaskManager";
-import Timetable from "../pages/Student/Curriculum/Timetable/Timetable";
+import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import AccountDepartment from "../pages/Campus/AccounDepartment";
 import Campus from "../pages/Campus/Campus";
 import Counselling from "../pages/Campus/Counselling";
 import Library from "../pages/Campus/Library";
-import Student from "../pages/Student/Student";
-import { RouteType } from "./config";
-import AccountSettings from "../components/AccountSettings/AccountSettings";
-import { AccountBalance, AccountCircle, Email, Home, School } from "@mui/icons-material";
 import Inbox from '../pages/Inbox/Inbox';
+import CourseRegistration from '../pages/Student/Curriculum/CourseRegistration/CourseRegistration';
+import Curriculum from "../pages/Student/Curriculum/Curriculum";
+import LearningResources from '../pages/Student/Curriculum/LearningResources/LearningResources';
+import Timetable from "../pages/Student/Curriculum/Timetable/Timetable";
+import Student from "../pages/Student/Student";
+import TaskManager from "../pages/Student/TaskManager/TaskManager";
+import { RouteType } from "./config";
 
 const appRoutes: RouteType[] = [
   {

@@ -31,7 +31,11 @@ export type Task = {
   completed: Boolean;
 };
 
-const TaskManager = () => {
+type Props = {
+  className?:string | null;
+}
+
+const TaskManager = ({className}:Props) => {
   const [openAddTask, setOpenAddTask] = useState(false);
   const [openAddFlag, setOpenAddFlag] = useState(false);
   const [openAddDate, setOpenAddDate] = useState(false);
@@ -82,57 +86,59 @@ const TaskManager = () => {
 
   return (
     <>
-      <Paper className="bg-neutral-200 py-2">
-        <Container className="flex items-center justify-between gap-3 mx-2">
+      <div className={`bg-neutral-100 py-2 rounded-lg ${className}`}>
+        <div className="flex items-center justify-between gap-3 mx-2">
           <Typography variant="h6" className="w-4/5">
-            Inbox
+            All
           </Typography>
           <IconButton centerRipple onClick={() => setOpenAddTask(true)}>
-            <AddCircle fontSize="large" className="" />
+            <AddCircle fontSize="large" className="text-neutral-700"/>
           </IconButton>
           <MoreVert />
-        </Container>
-        <List>
+        </div>
+        <ul>
           {tasks.map((task, index) => (
-            <ListItem key={index}>
-              <div className="flex justify-end w-full p-2">
-                <div className="w-3/4 flex gap-4">
-                  <div className="bg-red-600 w-2 rounded-sm"></div>
-                  <div>
-                    <p className="text-base leading-5 font-semibold">
+            <li key={index} className="mx-3 my-2">
+              <div className="flex justify-end w-full p-2 bg-neutral-200 rounded-md">
+                <div className="w-3/4 flex gap-2 ">
+                  <div className="bg-red-600 w-1 rounded-sm"></div>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-lg leading-5 font-semibold">
                       {task.title}
                     </p>
-                    <Typography className="text-xs mt-1">
+                    <p className="text-xs">
                       {task.description}
-                    </Typography>
-                    {task.date == null ? null : (
-                      <p className="text-[0.6rem] font-bold mt-2">
+                    </p>
+                    <p className="bg-red-500 text-[0.6rem] p-1 rounded-lg">Assignment</p>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-end w-1/4 text-right">
+                  <Checkbox onClick={() => removeTask(index)} />
+                  {task.date == null ? null : (
+                      <p className="text-[0.6rem] font-bold text-neutral-500 mt-2">
                         {task.date.getDate()}/{task.date.getMonth() + 1}/
                         {task.date.getFullYear()}
                       </p>
                     )}
-                  </div>
                 </div>
-                <Box className="justify-between w-1/4 text-right">
-                  <Checkbox onClick={() => removeTask(index)} />
-                </Box>
               </div>
-            </ListItem>
+            </li>
           ))}
-        </List>
-      </Paper>
+        </ul>
+      </div>
 
       {/* Add task popup */}
       {openAddTask ? (
         <Backdrop open className="z-10">
           <ClickAwayListener onClickAway={handleClickAway}>
-            <Paper className="flex flex-col w-11/12 rounded-md place-self-center">
+            <Paper className="bg-neutral-800 text-white bg-flex flex-col w-11/12 rounded-md place-self-center">
               <Container className="mt-2">
-                <Typography className="mb-4" variant="h6">
+                <Typography className="mb-4 text-white" variant="h6">
                   Add Task
                 </Typography>
                 <Input
                   placeholder="Todo / Task"
+                  className="text-white"
                   fullWidth
                   name="title"
                   onChange={(e) => setTitle(e.target.value)}
@@ -141,6 +147,7 @@ const TaskManager = () => {
                 <Input
                   placeholder="Description"
                   fullWidth
+                  className="text-white"
                   name="description"
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
@@ -149,15 +156,15 @@ const TaskManager = () => {
                   <Box>
                     <IconButton>
                       <CalendarMonth
-                        className="text-gray-800"
+                        className="text-white"
                         fontSize="small"
                       />
                     </IconButton>
                     <IconButton onClick={() => setOpenAddFlag(true)}>
-                      <Flag className="text-gray-800" fontSize="small" />
+                      <Flag className="text-white" fontSize="small" />
                     </IconButton>
                     <IconButton>
-                      <Inbox className="text-gray-800" fontSize="small" />
+                      <Inbox className="text-white" fontSize="small" />
                     </IconButton>
                   </Box>
                   <Box>
