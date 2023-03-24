@@ -5,21 +5,17 @@ import { ClickAwayListener } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import appRoutes from "../../../routes/routes";
-import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, ReactElement } from "react";
 
-interface Props {
+interface SidebarProps {
   sidebar: boolean;
   setSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Sidebar({setSidebar}:Props) {
-  const [openedList, setOpenList] = useState([])
-  const currentPage = useLocation()
-
-  useEffect(() => {
-    
-  }, [])
+export default function Sidebar({ setSidebar }: SidebarProps) {
+  const [activeSidebarChildren, setActiveSidebarChildren] = useState(true);
+  const currentPage = useLocation();
 
   return (
     <ClickAwayListener onClickAway={() => setSidebar(false)}>
@@ -37,21 +33,44 @@ export default function Sidebar({setSidebar}:Props) {
           </div>
           <div className="grow ">
             <SettingsIcon className="text-white" />
-          </div>\
+          </div>
+          \
         </div>
-        {appRoutes.map((page) => (
-          <ul>
-            <li className={`flex justify-between items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPage == page.path ? "bg-gray-100 dark:bg-gray-700" : " "}`} key={page.sidebarProps?.displayText}>
+        {appRoutes.map((page, index) => (
+          <div>
+            <div
+              className={`flex justify-between items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                currentPage.pathname == page.path
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : " "
+              }`}
+              key={page.sidebarProps?.displayText}
+            >
               <Link
-                to="/mail"
+                key={index}
+                to={page.path!}
                 className="flex items-center text-base font-normal text-gray-900 rounded-lg dark:text-white "
+                // onClick={() => setActiveSidebarChildren(index)}
               >
                 {page.sidebarProps?.icon}
                 <span className="ml-3">{page.sidebarProps?.displayText}</span>
               </Link>
-              {page.child ? <ExpandMoreIcon className="text-white"/> : null}
-            </li>
-          </ul>
+              {page.children ? <ExpandMoreIcon className="text-white" /> : null}
+            </div>
+            {page.children?.map((child, index) => (
+              <Link
+                key={index}
+                to={child.path!}
+                className={`pl-12 text-white my-2 block ${
+                  currentPage.pathname == child.path
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : " "
+                }`}
+              >
+                {child.sidebarProps?.displayText}
+              </Link>
+            ))}
+          </div>
         ))}
       </aside>
     </ClickAwayListener>
