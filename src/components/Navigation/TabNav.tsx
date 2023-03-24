@@ -1,73 +1,52 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { useState } from "react";
+import { To, useNavigate } from "react-router-dom";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+type TabProps = {
+  label: string;
+  active?: boolean;
+  onClick?: () => void;
+};
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
+const Tab: React.FC<TabProps> = ({ label, active = false, onClick }) => {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+    <div className="flex flex-col" onClick={onClick}>
+      <p>{label}</p>
+      <div
+        className={`${active ? "bg-red-600" : ""} rounded h-1
+      `}
+      ></div>
     </div>
   );
-}
+};
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+type TabNavProps = {
+  tabs: { label: string; path:To; content: React.ReactNode }[];
+};
 
-type Pages = {
-  pageTitle:string;
-  element:any
-}
+const TabNav: React.FC<TabNavProps> = ({ tabs }) => {
+  const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate()
 
-export default function TabNav(pages:Pages[]) {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleTabClick = (index: number, path:To) => {
+    setActiveTab(index);
+    navigate(path)
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          {
-            pages.map((page, index) => (
-              <Tab label={page.pageTitle} {...a11yProps(index)} />
-            ))
-          }
-        </Tabs>
-      </Box>
-
-      {
-        pages.map((page, index) => (
-          <TabPanel value={value} index={index}>
-            {page.element}
-          </TabPanel>
-        ))
-      }
-    </Box>
+    <div className="w-full">
+      <div className="flex gap-4">
+        {tabs.map((tab, index) => (
+          <Tab
+            key={tab.label}
+            label={tab.label}
+            active={activeTab === index}
+            onClick={() => handleTabClick(index, tab.path!)}
+          />
+        ))}
+      </div>
+      <div className="mt-4">{tabs[activeTab].content}</div>
+    </div>
   );
-}
+};
+
+export default TabNav;
