@@ -16,8 +16,8 @@ function App() {
           <Routes>
             <Route path="/home" element={<Home />}/>
             <Route path="/student" element={<Student />}>
-              <Route path="student/assignments_and_tasks"/>
-              <Route path="student/curriculum"/>
+              <Route path="/student/taskmanager"/>
+              <Route path="/student/curriculum"/>
             </Route>
             <Route path="/campus" element={<Campus />}>
               <Route path="/campus/account_department"/>
