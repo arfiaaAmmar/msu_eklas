@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed bottom-2 w-full">
+      <div className="fixed bottom-2 w-full shadow-2xl">
         <div className="flex bg-neutral-800 justify-evenly h-16 mx-2 mb-auto shadow-lg shadow-white rounded-2xl">
           <Link
             key={0}

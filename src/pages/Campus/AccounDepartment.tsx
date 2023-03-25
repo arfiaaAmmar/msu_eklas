@@ -27,7 +27,7 @@ const AccountDepartment = () => {
           <p>Balance :</p>
           <p className="font-bold">RM1241</p>
         </div>
-        <button className="bg-red-600 rounded-md px-1 my-2 text-white">
+        <button className="block ml-auto mr-0 bg-red-600 rounded-md px-2 my-2 text-white">
           Full Statement
         </button>
         <p className="text-white ">View Receipt</p>
@@ -58,19 +58,16 @@ const AccountDepartment = () => {
           <p className="text-white flex-grow">Pay Now</p>
         </div>
         <div className="mt-4">
-          <div className="flex justify-between bg-neutral-300 px-2 rounded-md my-2">
-            <p>Payment Method :</p>
-            <div></div>
+          <div className="flex justify-between bg-neutral-300 px-2 rounded-md">
+            <p>Method :</p>
+            <select name="PaymentMethod" id="PaymentMethod" title="PaymentMethod" className="bg-neutral-300 text-right text-sm">
+              <option value="Credit/Debit">Credit/Debit</option>
+              <option value="Online Banking">Online Banking</option>
+            </select>
           </div>
-          <div className="flex justify-between bg-neutral-300 px-2 rounded-md my-2">
-            <p>This semester :</p>
-            <p className="font-bold">RM1241</p>
-          </div>
-          <div className="flex justify-between bg-neutral-300 px-2 rounded-md my-2">
-            <p>This semester :</p>
-            <p className="font-bold">RM1241</p>
-          </div>
-          <div className="flex gap-4">
+          <input type="text" placeholder="Full Name" className="bg-neutral-300 px-2 rounded-md my-2 w-full"/>
+          <input type="number" name="CardNumber" id="CardNumber" placeholder="Card Number" className="bg-neutral-300 px-2 rounded-md w-full" />
+          <div className="flex gap-4 mt-2">
             <input
               placeholder="CVV"
               className="bg-neutral-300 rounded-md px-2 w-16"

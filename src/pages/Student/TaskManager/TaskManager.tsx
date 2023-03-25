@@ -45,6 +45,12 @@ const TaskManager = ({className}:Props) => {
   const [flag, setFlag] = useState();
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  const tasks2:Task[] = [
+    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false},
+    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false},
+    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false}
+  ]
+
   const AddTask = () => {
     if (title == "") return;
     tasks.push({
@@ -97,7 +103,7 @@ const TaskManager = ({className}:Props) => {
           <MoreVert />
         </div>
         <ul>
-          {tasks.map((task, index) => (
+          {tasks2.map((task, index) => (
             <li key={index} className="mx-3 my-2">
               <div className="flex justify-end w-full p-2 bg-neutral-200 rounded-md">
                 <div className="w-3/4 flex gap-2 ">

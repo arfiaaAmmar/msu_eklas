@@ -19,7 +19,7 @@ const Tab: React.FC<TabProps> = ({ label, active = false, onClick }) => {
   );
 };
 
-type TabNavProps = {
+export type TabNavProps = {
   tabs: { label: string; path:To; content: React.ReactNode }[];
 };
 

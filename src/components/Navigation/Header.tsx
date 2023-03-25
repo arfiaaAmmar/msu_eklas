@@ -31,7 +31,7 @@ export const Header = () => {
         <IconButton onClick={() => setSidebar(true)}>
           <MenuIcon className="text-center text-white my-auto"/>
         </IconButton>
-
+        <input type="search" title="SearchBox" placeholder="Search" className="rounded-2xl h-8 my-auto ml-0 mr-auto bg-neutral-100 p-2"/>
         <Box
           sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
         >

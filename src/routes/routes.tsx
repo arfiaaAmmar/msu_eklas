@@ -1,16 +1,16 @@
 import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import AccountDepartment from "../pages/Campus/AccounDepartment";
 import Campus from "../pages/Campus/Campus";
-import Counselling from "../pages/Campus/Counselling";
+import Counselling from "../pages/Campus/Booking";
 import Library from "../pages/Campus/Library";
 import Inbox from '../pages/Inbox/Inbox';
-import CourseRegistration from '../pages/Student/Curriculum/CourseRegistration/CourseRegistration';
 import Curriculum from "../pages/Student/Curriculum/Curriculum";
-import LearningResources from '../pages/Student/Curriculum/LearningResources/LearningResources';
-import Timetable from "../pages/Student/Curriculum/Timetable/Timetable";
 import Student from "../pages/Student/Student";
 import TaskManager from "../pages/Student/TaskManager/TaskManager";
 import { RouteType } from "./config";
+import Timetable from "../pages/Student/Curriculum/Timetable/Timetable";
+import CourseRegistration from "../pages/Student/Curriculum/CourseRegistration/CourseRegistration";
+import LearningResources from "../pages/Student/Curriculum/LearningResources/LearningResources";
 
 const appRoutes: RouteType[] = [
   {
@@ -31,7 +31,7 @@ const appRoutes: RouteType[] = [
       displayText: "Student",
       icon: <School />,
     },
-    child: [
+    children: [
       {
         path: "/student/taskmanager",
         element: <TaskManager />,
@@ -39,7 +39,7 @@ const appRoutes: RouteType[] = [
         sidebarProps: {
           displayText: "Task Manager",
         },
-        child: [
+        children: [
           {
             path: "/student/taskmanager/submission",
             element: <TaskManager />,
@@ -65,7 +65,7 @@ const appRoutes: RouteType[] = [
         sidebarProps: {
           displayText: "Curriculum",
         },
-        child: [
+        children: [
           {
             path: "student/curriculum/timetable&calendar",
             element: <Timetable />,
@@ -81,7 +81,7 @@ const appRoutes: RouteType[] = [
             sidebarProps: {
               displayText: "Statements & Results",
             },
-            child: [
+            children: [
               {
                 path: "student/curriculum/statements&results/exam_results",
                 element: <Timetable />,
@@ -144,7 +144,7 @@ const appRoutes: RouteType[] = [
       icon: <AccountBalance />,
       displayText: "Campus"
     },
-    child: [
+    children: [
       {
         path: "campus/account_department",
         element: <AccountDepartment />,
@@ -152,7 +152,7 @@ const appRoutes: RouteType[] = [
         sidebarProps: {
           displayText: "Account Department"
         },
-        child: [
+        children: [
           {
             path: "campus/account_department/payment",
             element: <AccountDepartment />,
@@ -186,7 +186,7 @@ const appRoutes: RouteType[] = [
         sidebarProps: {
           displayText: "Library",
         },
-        child: [
+        children: [
           {
             path: "campus/library/room_booking",
             element: <Library />,
@@ -216,7 +216,7 @@ const appRoutes: RouteType[] = [
     ]
   },
   {
-    path: "/mail",
+    path: "/inbox",
     element: <Inbox />,
     state: "inbox.default",
     sidebarProps: {

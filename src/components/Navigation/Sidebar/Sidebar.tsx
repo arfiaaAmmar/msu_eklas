@@ -7,6 +7,8 @@ import * as React from "react";
 import appRoutes from "../../../routes/routes";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, ReactElement } from "react";
+import AnimatedPage from "../../AnimatePage";
+import { motion } from "framer-motion";
 
 interface SidebarProps {
   sidebar: boolean;
@@ -19,7 +21,7 @@ export default function Sidebar({ setSidebar }: SidebarProps) {
 
   return (
     <ClickAwayListener onClickAway={() => setSidebar(false)}>
-      <aside className="bg-neutral-800 h-screen absolute z-10 shadow-xl top-0">
+      <aside className="bg-neutral-800 pt-2 pb-8 block my-auto absolute z-10 shadow-lg rounded-r-2xl">
         <img
           src="/images/eklas_logo.png"
           alt=""
@@ -61,7 +63,7 @@ export default function Sidebar({ setSidebar }: SidebarProps) {
               <Link
                 key={index}
                 to={child.path!}
-                className={`pl-12 text-white my-2 block ${
+                className={`indent-10 text-white my-2 block ${
                   currentPage.pathname == child.path
                     ? "bg-gray-100 dark:bg-gray-700"
                     : " "

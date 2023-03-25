@@ -6,7 +6,7 @@ export type RouteType = {
   state: string,
   index?: boolean,
   path?: string | Partial<Path>,
-  child?: RouteType[],
+  children?: RouteType[],
   sidebarProps?: {
     displayText: string,
     icon?: ReactNode;

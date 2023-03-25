@@ -16,14 +16,13 @@ function App() {
           <Routes>
             <Route path="/home" element={<Home />}/>
             <Route path="/student" element={<Student />}>
-              <Route path="/student/taskmanager"/>
-              <Route path="/student/curriculum"/>
+              <Route path="/student/taskmanager" />
+              <Route path="/student/curriculum" />
             </Route>
             <Route path="/campus" element={<Campus />}>
               <Route path="/campus/account_department"/>
               <Route path="/campus/library"/>
-              <Route path="/campus/counselling"/>
-              <Route path="/campus/others"/>
+              <Route path="/campus/booking"/>
             </Route>
             <Route path="/inbox" element={<Inbox />} />
           </Routes>

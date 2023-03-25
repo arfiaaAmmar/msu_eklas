@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { useGlobalContext } from "../context/GlobalContext";
 
 interface Props {
   children: React.ReactNode;
