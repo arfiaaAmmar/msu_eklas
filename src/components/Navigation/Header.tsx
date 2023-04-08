@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
 import Sidebar from "./Sidebar/Sidebar";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -96,7 +97,7 @@ export const Header = () => {
             <ListItemIcon>
               <Logout fontSize="medium" />
             </ListItemIcon>
-            Logout
+            <Link to="/">Logout</Link>
           </MenuItem>
         </Menu>
       </div>
