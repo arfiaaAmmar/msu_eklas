@@ -8,6 +8,7 @@ import { Header } from "../../components/Navigation/Header";
 import Navbar from "../../components/Navigation/Navbar";
 
 const Campus = () => {
+
   const tabs = [
     {
       label: "Account Dept",
@@ -20,14 +21,12 @@ const Campus = () => {
 
   return (
     <>
-      <Header />
       <AnimatedPage>
         <Container className="mt-20 mb-20">
           <Typography variant="h6">Campus</Typography>
           <TabNav tabs={tabs} />
         </Container>
       </AnimatedPage>
-      <Navbar />
     </>
   );
 };

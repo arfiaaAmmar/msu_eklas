@@ -9,7 +9,6 @@ import Navbar from "../components/Navigation/Navbar";
 export default function Home() {
   return (
     <>
-      <Header />
       <AnimatedPage>
         <Container className="mt-20 mb-20">
           <Typography variant="h6">Latest News</Typography>
@@ -19,7 +18,6 @@ export default function Home() {
         </Container>
         <FeatureOverlay />
       </AnimatedPage>
-      <Navbar />
     </>
   );
 }

@@ -9,26 +9,27 @@ import Navbar from "./components/Navigation/Navbar";
 import Login from "./pages/Login/Login";
 
 function App() {
-
   return (
     <>
       <GlobalContextProvider>
         <Router>
+        {location.pathname !== "/login" ? <Header /> : null}
           <Routes>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/home" element={<Home />}/>
+            <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/student" element={<Student />}>
               <Route path="/student/taskmanager" />
               <Route path="/student/curriculum" />
             </Route>
             <Route path="/campus" element={<Campus />}>
-              <Route path="/campus/account_department"/>
-              <Route path="/campus/library"/>
-              <Route path="/campus/booking"/>
+              <Route path="/campus/account_department" />
+              <Route path="/campus/library" />
+              <Route path="/campus/booking" />
             </Route>
             <Route path="/inbox" element={<Inbox />} />
           </Routes>
-          </Router>
+          {location.pathname !== "login" ? <Navbar /> : null}
+        </Router>
       </GlobalContextProvider>
     </>
   );

@@ -1,10 +1,8 @@
-import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { Container, Typography } from "@mui/material";
 import AnimatedPage from "../../components/AnimatePage";
 import TabNav from "../../components/Navigation/TabNav";
 import TaskManager from "./TaskManager/TaskManager";
 import Curriculum from "./Curriculum/Curriculum";
-import appRoutes from "../../routes/routes";
 import { Header } from "../../components/Navigation/Header";
 import Navbar from "../../components/Navigation/Navbar";
 
@@ -24,14 +22,12 @@ const Student = () => {
 
   return (
     <>
-      <Header />
       <AnimatedPage>
         <Container className="mt-20 mb-20">
           <Typography variant="h6">Student</Typography>
           <TabNav tabs={tabs} />
         </Container>
       </AnimatedPage>
-      <Navbar />
     </>
   );
 };

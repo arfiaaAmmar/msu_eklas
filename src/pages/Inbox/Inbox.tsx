@@ -15,13 +15,11 @@ import Navbar from "../../components/Navigation/Navbar";
 export default function Inbox() {
   return (
     <>
-      <Header />
       <AnimatedPage>
         <Container className="mt-20 mb-20">
           <Typography variant="h6">Mail</Typography>
         </Container>
       </AnimatedPage>
-      <Navbar />
     </>
   );
 }
