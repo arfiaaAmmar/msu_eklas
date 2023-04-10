@@ -97,7 +97,7 @@ export const Header = () => {
             <ListItemIcon>
               <Logout fontSize="medium" />
             </ListItemIcon>
-            <Link to="/">Logout</Link>
+            <Link to="/login">Logout</Link>
           </MenuItem>
         </Menu>
       </div>

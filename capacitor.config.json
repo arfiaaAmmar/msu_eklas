@@ -1,1 +1,11 @@
-{}
+{
+  "server": {
+    "url": "http://192.168.100.224:8100",
+    "cleartext": true,
+    "originalUrl": "192.168.100.244"
+  },
+  "appId": "com.example.app",
+  "appName": "msu_eklas",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

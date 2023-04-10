@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 // import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [userMode, setUserMode] = useState("student");
+  const [route, setRoute] = useState()
   // const { login } = useAuth();
   const active = "w-2/4 flex items-center justify-evenly border-r border-neutral-300 bg-neutral-300"
   const inactive = "w-2/4 flex items-center justify-evenly border-r border-neutral-300"
@@ -30,10 +31,10 @@ const Login = () => {
 
   return (
     <div className="h-screen ">
-      <div className="flex overflow-hidden h-1/4 mx-8 mt-6 relative">
+      <div className="flex overflow-hidden bg-neutral-800 h-1/4 relative">
         <img
-          className="object-contain p-2"
-          src="/images/msu_logo.png"
+          className="object-contain px-8 pt-6"
+          src="/images/eklas_logo.png"
           alt="msu logo"
         />
       </div>
@@ -104,11 +105,11 @@ const Login = () => {
             backgroundColor: "#ed2124",
           }}
         >
-          Sign In
+          <Link to="/home">Sign In</Link>
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link to="/register">
               Forgot password?
             </Link>
           </Grid>

@@ -1,5 +1,7 @@
 import AnimatedPage from "../../components/AnimatePage";
 import { Container, Typography } from "@mui/material";
+import { Header } from "../../components/Navigation/Header";
+import Navbar from "../../components/Navigation/Navbar";
 
 // function refreshMessages(): MessageExample[] {
 //   const getRandomInt = (max: number) =>
@@ -12,11 +14,15 @@ import { Container, Typography } from "@mui/material";
 
 export default function Inbox() {
   return (
-    <AnimatedPage>
-      <Container className="mt-20 mb-20">
-        <Typography variant="h6">Mail</Typography>
-      </Container>
-    </AnimatedPage>
+    <>
+      <Header />
+      <AnimatedPage>
+        <Container className="mt-20 mb-20">
+          <Typography variant="h6">Mail</Typography>
+        </Container>
+      </AnimatedPage>
+      <Navbar />
+    </>
   );
 }
 

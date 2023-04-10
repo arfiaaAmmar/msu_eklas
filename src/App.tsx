@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Header } from "./components/Navigation/Header";
 import { GlobalContextProvider } from "./context/GlobalContext";
 import Campus from "./pages/Campus/Campus";
@@ -14,9 +14,6 @@ function App() {
     <>
       <GlobalContextProvider>
         <Router>
-          {
-            window.location.pathname !== "/login" && window.location.pathname !== "/register" && <Header />          
-          }
           <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path="/home" element={<Home />}/>
@@ -31,10 +28,7 @@ function App() {
             </Route>
             <Route path="/inbox" element={<Inbox />} />
           </Routes>
-          {
-            window.location.pathname !== "/login" && window.location.pathname !== "/register" && <Navbar />
-          }
-        </Router>
+          </Router>
       </GlobalContextProvider>
     </>
   );

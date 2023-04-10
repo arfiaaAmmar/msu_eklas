@@ -45,12 +45,6 @@ const TaskManager = ({className}:Props) => {
   const [flag, setFlag] = useState();
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const tasks2:Task[] = [
-    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false},
-    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false},
-    {title: "Test1", description: "Desciprion testsrg", date: new Date(), flag: "msu", completed: false}
-  ]
-
   const AddTask = () => {
     if (title == "") return;
     tasks.push({
@@ -67,16 +61,16 @@ const TaskManager = ({className}:Props) => {
 
   const handleClickAway = () => {
     if (title != null) {
-      localStorage.setItem("title", title);
+      sessionStorage.setItem("title", title);
     }
     if (description != null) {
-      localStorage.setItem("description", description);
+      sessionStorage.setItem("description", description);
     }
     if (date != null) {
-      localStorage.setItem("date", date);
+      sessionStorage.setItem("date", date);
     }
     if (flag != null) {
-      localStorage.setItem("flag", flag);
+      sessionStorage.setItem("flag", flag);
     }
     setOpenAddTask(false);
   };
@@ -86,8 +80,8 @@ const TaskManager = ({className}:Props) => {
   };
 
   useEffect(() => {
-    setTitle(localStorage.getItem("title")?.toString());
-    setDescription(localStorage.getItem("description")?.toString());
+    // setTitle(sessionStorage.getItem("title")?.toString());
+    // setDescription(sessionStorage.getItem("description")?.toString());
   }, []);
 
   return (
@@ -103,7 +97,7 @@ const TaskManager = ({className}:Props) => {
           <MoreVert />
         </div>
         <ul>
-          {tasks2.map((task, index) => (
+          {tasks.map((task, index) => (
             <li key={index} className="mx-3 my-2">
               <div className="flex justify-end w-full p-2 bg-neutral-200 rounded-md">
                 <div className="w-3/4 flex gap-2 ">
