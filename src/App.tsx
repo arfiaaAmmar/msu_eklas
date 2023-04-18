@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Header } from "./components/Navigation/Header";
 import { GlobalContextProvider } from "./context/GlobalContext";
 import Campus from "./pages/Campus/Campus";
@@ -8,12 +8,14 @@ import Student from "./pages/Student/Student";
 import Navbar from "./components/Navigation/Navbar";
 import Login from "./pages/Login/Login";
 
+
 function App() {
+  const location = useLocation()
+
   return (
     <>
       <GlobalContextProvider>
-        <Router>
-        {location.pathname !== "/login" ? <Header /> : null}
+        {location.pathname != "/login" ? <Header /> : null}
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
@@ -22,14 +24,13 @@ function App() {
               <Route path="/student/curriculum" />
             </Route>
             <Route path="/campus" element={<Campus />}>
-              <Route path="/campus/account_department" />
+              <Route path="/campus/account_department" /> 
               <Route path="/campus/library" />
               <Route path="/campus/booking" />
             </Route>
             <Route path="/inbox" element={<Inbox />} />
           </Routes>
-          {location.pathname !== "login" ? <Navbar /> : null}
-        </Router>
+          {location.pathname != "/login" ? <Navbar /> : null}
       </GlobalContextProvider>
     </>
   );
