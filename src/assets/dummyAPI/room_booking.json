@@ -1,0 +1,68 @@
+{
+    "departments": [
+      {
+        "name": "Accounts Dept.",
+        "rooms": [
+          {
+            "name": "Room 1",
+            "booking_date": "2023-05-01",
+            "image": "https://example.com/room1.jpg"
+          },
+          {
+            "name": "Room 2",
+            "booking_date": "2023-06-15",
+            "image": "https://example.com/room2.jpg"
+          },
+          {
+            "name": "Room 3",
+            "booking_date": "2023-07-23",
+            "image": "https://example.com/room3.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Library",
+        "rooms": [
+          {
+            "name": "Room 1",
+            "booking_date": "2023-05-03",
+            "image": "https://example.com/room4.jpg"
+          },
+          {
+            "name": "Room 2",
+            "booking_date": "2023-06-17",
+            "image": "https://example.com/room5.jpg"
+          },
+          {
+            "name": "Room 3",
+            "booking_date": "2023-08-05",
+            "image": "https://example.com/room6.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Counselling",
+        "rooms": [
+          {
+            "name": "Room 1",
+            "booking_date": "2023-05-10",
+            "image": "https://example.com/room7.jpg"
+          },
+          {
+            "name": "Room 2",
+            "booking_date": "2023-06-25",
+            "image": "https://example.com/room8.jpg"
+          },
+          {
+            "name": "Room 3",
+            "booking_date": "2023-07-30",
+            "image": "https://example.com/room9.jpg"
+          }
+        ]
+      }
+    ],
+    "booking_list":[
+      
+    ]
+  }
+  
