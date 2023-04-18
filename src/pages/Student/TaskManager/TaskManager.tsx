@@ -17,71 +17,123 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { Backdrop, ClickAwayListener } from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import { v4 as uuidv4 } from 'uuid';
+import TodoTask from "./Task";
 
 export type Task = {
-  title?: String;
-  description?: String;
+  id: number;
+  title: string;
+  description?: string;
   date?: Date;
-  flag: "inbox" | "msu" | String;
+  flag?: "inbox" | "msu" | string;
   completed: Boolean;
 };
 
 type Props = {
-  className?:string | null;
-}
+  className?: string | null;
+};
 
-const TaskManager = ({className}:Props) => {
+const TaskManager = ({ className }: Props) => {
   const [openAddTask, setOpenAddTask] = useState(false);
   const [openAddFlag, setOpenAddFlag] = useState(false);
   const [openAddDate, setOpenAddDate] = useState(false);
-  const [title, setTitle] = useState<string | undefined>();
-  const [description, setDescription] = useState<string | undefined>();
-  const [date, setDate] = useState();
-  const [flag, setFlag] = useState();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  // const [title, setTitle] = useState<string | undefined>();
+  // const [description, setDescription] = useState<string | undefined>();
+  // const [date, setDate] = useState();
+  // const [flag, setFlag] = useState();
+  const [task, setTask] = useState<Task>({
+      id: 0,
+      title: '',
+      description: "",
+      date: undefined,
+      completed: false,
+      flag:"inbox",
+    },
+  )
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      id: 1,
+      title: "Task 1",
+      description: "This is an easy task to do",
+      date: new Date(2020 - 10 - 21),
+      completed: false,
+      flag: "inbox",
+    },
+    {
+      id: 2,
+      title: "Task 2",
+      description: "This is an easy task to do like my mum said... I don't know if it's true though",
+      date: new Date(2020 - 10 - 21),
+      completed: false,
+      flag: "inbox",
+    },
+  ]);
 
   const AddTask = () => {
-    if (title == "") return;
-    tasks.push({
-      title: title,
-      description: description,
-      date: new Date(),
-      flag: "inbox",
+    const newId = tasks.length ? tasks[tasks.length + 1].id + 1 : 1;
+    if (task?.title == "") return;
+    setTasks([
+      ...tasks, {
+        id: newId,
+        title: task?.title,
+        description: task?.description,
+        date: new Date(),
+        flag: "inbox",
+        completed: false,
+      }
+    ])
+    // tasks.push({
+    //   id: self.crypto.randomUUID(),
+    //   title: title,
+    //   description: description,
+    //   date: new Date(),
+    //   flag: "inbox",
+    //   completed: false,
+    // });
+    setTask({
+      id: 1,
+      title: '',
+      description: '',
+      date: undefined,
       completed: false,
-    });
-    setTitle("");
-    setDescription("");
+    })
+    // setTasks()
+    // setTitle("");
+    // setDescription("");
     setOpenAddTask(!open);
   };
 
   const handleClickAway = () => {
-    if (title != null) {
-      sessionStorage.setItem("title", title);
-    }
-    if (description != null) {
-      sessionStorage.setItem("description", description);
-    }
-    if (date != null) {
-      sessionStorage.setItem("date", date);
-    }
-    if (flag != null) {
-      sessionStorage.setItem("flag", flag);
-    }
+    // if (task.title != null) {
+    //   sessionStorage.setItem("title", task.title);
+    // }
+    // if (task.description != null) {
+    //   sessionStorage.setItem("description", task.description);
+    // }
+    // if (task.date != null) {
+    //   sessionStorage.setItem("date", task.date.toString());
+    // }
+    // if (task.flag != null) {
+    //   sessionStorage.setItem("flag", task.flag);
+    // }
+
     setOpenAddTask(false);
   };
 
-  const removeTask = (index: number) => {
-    setTasks(tasks.splice(index));
+  const removeTask = (id: number) => {
+    setTasks(tasks.filter(task => task.id !== id));
   };
 
   useEffect(() => {
     // setTitle(sessionStorage.getItem("title")?.toString());
     // setDescription(sessionStorage.getItem("description")?.toString());
+
+    //get from server 
   }, []);
 
   return (
@@ -92,37 +144,13 @@ const TaskManager = ({className}:Props) => {
             All
           </Typography>
           <IconButton centerRipple onClick={() => setOpenAddTask(true)}>
-            <AddCircle fontSize="large" className="text-neutral-700"/>
+            <AddCircle fontSize="large" className="text-neutral-700" />
           </IconButton>
           <MoreVert />
         </div>
         <ul>
-          {tasks.map((task, index) => (
-            <li key={index} className="mx-3 my-2">
-              <div className="flex justify-end w-full p-2 bg-neutral-200 rounded-md">
-                <div className="w-3/4 flex gap-2 ">
-                  <div className="bg-red-600 w-1 rounded-sm"></div>
-                  <div className="flex flex-col gap-2">
-                    <p className="text-lg leading-5 font-semibold">
-                      {task.title}
-                    </p>
-                    <p className="text-xs">
-                      {task.description}
-                    </p>
-                    <p className="bg-red-500 text-[0.6rem] p-1 rounded-lg">Assignment</p>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-end w-1/4 text-right">
-                  <Checkbox onClick={() => removeTask(index)} />
-                  {task.date == null ? null : (
-                      <p className="text-[0.6rem] font-bold text-neutral-500 mt-2">
-                        {task.date.getDate()}/{task.date.getMonth() + 1}/
-                        {task.date.getFullYear()}
-                      </p>
-                    )}
-                </div>
-              </div>
-            </li>
+          {tasks.map((task) => (
+            <TodoTask key={task.id} id={task.id} title={task.title} description={task?.description} onDelete={removeTask} />
           ))}
         </ul>
       </div>
@@ -141,24 +169,21 @@ const TaskManager = ({className}:Props) => {
                   className="text-white"
                   fullWidth
                   name="title"
-                  onChange={(e) => setTitle(e.target.value)}
-                  value={title}
+                  onChange={e => setTask({...task, title: e.target.value})}
+                  value={task?.title}
                 />
                 <Input
                   placeholder="Description"
                   fullWidth
                   className="text-white"
                   name="description"
-                  onChange={(e) => setDescription(e.target.value)}
-                  value={description}
+                  onChange={(e) => setTask({...task, description: e.target.value})}
+                  value={task.description}
                 />
                 <div className="flex justify-between items-center">
                   <Box>
                     <IconButton>
-                      <CalendarMonth
-                        className="text-white"
-                        fontSize="small"
-                      />
+                      <CalendarMonth className="text-white" fontSize="small" />
                     </IconButton>
                     <IconButton onClick={() => setOpenAddFlag(true)}>
                       <Flag className="text-white" fontSize="small" />
