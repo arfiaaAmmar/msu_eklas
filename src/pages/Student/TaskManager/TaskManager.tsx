@@ -7,138 +7,93 @@ import {
   DoubleArrow,
 } from "@mui/icons-material";
 import {
-  Checkbox,
   Container,
   IconButton,
   Input,
-  List,
-  ListItem,
   MenuList,
   Paper,
   Typography,
 } from "@mui/material";
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect } from "react";
 import { Backdrop, ClickAwayListener } from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { v4 as uuidv4 } from 'uuid';
-import TodoTask from "./Task";
+import Task from "./Task";
 
 export type Task = {
   id: number;
   title: string;
   description?: string;
   date?: Date;
-  flag?: "inbox" | "msu" | string;
+  flag?: "inbox" | "msu" | "personal" | string;
   completed: Boolean;
 };
 
-type Props = {
-  className?: string | null;
-};
-
-const TaskManager = ({ className }: Props) => {
+const TaskManager = () => {
   const [openAddTask, setOpenAddTask] = useState(false);
   const [openAddFlag, setOpenAddFlag] = useState(false);
   const [openAddDate, setOpenAddDate] = useState(false);
-  // const [title, setTitle] = useState<string | undefined>();
-  // const [description, setDescription] = useState<string | undefined>();
-  // const [date, setDate] = useState();
-  // const [flag, setFlag] = useState();
   const [task, setTask] = useState<Task>({
-      id: 0,
-      title: '',
-      description: "",
-      date: undefined,
-      completed: false,
-      flag:"inbox",
-    },
-  )
+    id: 0,
+    title: "",
+    description: "",
+    date: undefined,
+    completed: false,
+    flag: "inbox",
+  });
+
   const [tasks, setTasks] = useState<Task[]>([
     {
-      id: 1,
+      id: 0,
       title: "Task 1",
       description: "This is an easy task to do",
-      date: new Date(2020 - 10 - 21),
+      date: new Date(),
       completed: false,
       flag: "inbox",
     },
     {
-      id: 2,
+      id: 1,
       title: "Task 2",
-      description: "This is an easy task to do like my mum said... I don't know if it's true though",
-      date: new Date(2020 - 10 - 21),
+      description:
+        "This is an easy task to do like my mum said... I don't know if it's true though akfnkajefnkaj nakjwndkajnksjrg kjsrgnk jsbrgkj nkhjtn kjrfn ksjbskgrbk gsjrgk sjrngkjs nkjsbksjgnksj ",
+      date: new Date(),
       completed: false,
-      flag: "inbox",
+      flag: "personal",
     },
   ]);
 
   const AddTask = () => {
-    const newId = tasks.length ? tasks[tasks.length + 1].id + 1 : 1;
     if (task?.title == "") return;
     setTasks([
-      ...tasks, {
-        id: newId,
+      ...tasks,
+      {
+        id: tasks.length + 1,
         title: task?.title,
         description: task?.description,
         date: new Date(),
         flag: "inbox",
         completed: false,
-      }
-    ])
-    // tasks.push({
-    //   id: self.crypto.randomUUID(),
-    //   title: title,
-    //   description: description,
-    //   date: new Date(),
-    //   flag: "inbox",
-    //   completed: false,
-    // });
+      },
+    ]);
+
     setTask({
-      id: 1,
-      title: '',
-      description: '',
+      id: 0,
+      title: "",
+      description: "",
       date: undefined,
       completed: false,
-    })
-    // setTasks()
-    // setTitle("");
-    // setDescription("");
+    });
     setOpenAddTask(!open);
   };
 
-  const handleClickAway = () => {
-    // if (task.title != null) {
-    //   sessionStorage.setItem("title", task.title);
-    // }
-    // if (task.description != null) {
-    //   sessionStorage.setItem("description", task.description);
-    // }
-    // if (task.date != null) {
-    //   sessionStorage.setItem("date", task.date.toString());
-    // }
-    // if (task.flag != null) {
-    //   sessionStorage.setItem("flag", task.flag);
-    // }
-
-    setOpenAddTask(false);
-  };
-
   const removeTask = (id: number) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
-
-  useEffect(() => {
-    // setTitle(sessionStorage.getItem("title")?.toString());
-    // setDescription(sessionStorage.getItem("description")?.toString());
-
-    //get from server 
-  }, []);
 
   return (
     <>
-      <div className={`bg-neutral-100 py-2 rounded-lg ${className}`}>
+      <div className="bg-neutral-100 py-2 rounded-lg">
         <div className="flex items-center justify-between gap-3 mx-2">
           <Typography variant="h6" className="w-4/5">
             All
@@ -150,7 +105,15 @@ const TaskManager = ({ className }: Props) => {
         </div>
         <ul>
           {tasks.map((task) => (
-            <TodoTask key={task.id} id={task.id} title={task.title} description={task?.description} onDelete={removeTask} />
+            <Task
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              description={task?.description}
+              date={task.date}
+              flag={task.flag}
+              onDelete={() => removeTask(task.id)}
+            />
           ))}
         </ul>
       </div>
@@ -158,7 +121,7 @@ const TaskManager = ({ className }: Props) => {
       {/* Add task popup */}
       {openAddTask ? (
         <Backdrop open className="z-10">
-          <ClickAwayListener onClickAway={handleClickAway}>
+          <ClickAwayListener onClickAway={() => setOpenAddTask(false)}>
             <Paper className="bg-neutral-800 text-white bg-flex flex-col w-11/12 rounded-md place-self-center">
               <Container className="mt-2">
                 <Typography className="mb-4 text-white" variant="h6">
@@ -169,16 +132,18 @@ const TaskManager = ({ className }: Props) => {
                   className="text-white"
                   fullWidth
                   name="title"
-                  onChange={e => setTask({...task, title: e.target.value})}
-                  value={task?.title}
+                  onChange={(e) => setTask({ ...task, title: e.target.value })}
+                  value={task.title}
                 />
                 <Input
                   placeholder="Description"
                   fullWidth
                   className="text-white"
                   name="description"
-                  onChange={(e) => setTask({...task, description: e.target.value})}
-                  value={task.description}
+                  onChange={(e) =>
+                    setTask({ ...task, description: e.target.value })
+                  }
+                  value={task?.description}
                 />
                 <div className="flex justify-between items-center">
                   <Box>

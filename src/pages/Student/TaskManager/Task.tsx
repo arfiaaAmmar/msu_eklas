@@ -1,30 +1,43 @@
 import { CheckBox } from "@mui/icons-material";
-import React from "react";
+import { useState } from "react";
 
 type TaskProps = {
   id: number,
   title: string,
   description?: string, 
   date?: Date,
-  onDelete: Function
+  flag?: string,  
+  onDelete: any
 }
 
-const Task = ({id, title, description, date, onDelete}:TaskProps) => {
+const Task = ({title, description, date, flag, onDelete}:TaskProps) => {
+
+  let flagColor = 'bg-red-500'
+  if(flag == 'msu'){
+    flagColor = 'bg-red-500'
+  }
+  if(flag == 'personal'){
+    flagColor = 'bg-green-500'
+  }
+  if(flag == 'inbox'){
+    flagColor = 'bg-blue-500'
+  }
+
   return (
-    <li key={id} className="mx-3 my-2">
+    <li className="mx-3 my-2">
       <div className="flex justify-end w-full p-2 bg-neutral-200 rounded-md">
         <div className="w-3/4 flex gap-2 ">
           <div className="bg-red-600 w-1 rounded-sm"></div>
           <div className="flex flex-col gap-2">
             <p className="text-lg leading-5 font-semibold">{title}</p>
             <p className="text-xs">{description}</p>
-            <p className="bg-red-500 text-[0.6rem] p-1 rounded-lg">
-              Assignment
+            <p className={`bg-red-500 ${flagColor} text-[0.6rem] p-1 w-max rounded-lg`}>
+              {flag}
             </p>
           </div>
         </div>
-        <div className="flex flex-col justify-end w-1/4 text-right">
-          <CheckBox onClick={() => onDelete(id)} />
+        <div className="flex flex-col m-auto justify-end w-1/4 text-right">
+          <CheckBox onClick={onDelete} className="m-auto"/>
           {date == null ? null : (
             <p className="text-[0.6rem] font-bold text-neutral-500 mt-2">
               {date.getDate()}/{date.getMonth() + 1}/
