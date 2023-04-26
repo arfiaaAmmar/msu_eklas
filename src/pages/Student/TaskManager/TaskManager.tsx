@@ -31,9 +31,13 @@ export type Task = {
 };
 
 const TaskManager = () => {
-  const [openAddTask, setOpenAddTask] = useState(false);
-  const [openAddFlag, setOpenAddFlag] = useState(false);
-  const [openAddDate, setOpenAddDate] = useState(false);
+  const [modals, setModals] = useState({
+    task: false,
+    date: false,
+    flag: false,
+    label: false,
+  });
+
   const [task, setTask] = useState<Task>({
     id: 0,
     title: "",
@@ -56,7 +60,7 @@ const TaskManager = () => {
       id: 1,
       title: "Task 2",
       description:
-        "This is an easy task to do like my mum said... I don't know if it's true though akfnkajefnkaj nakjwndkajnksjrg kjsrgnk jsbrgkj nkhjtn kjrfn ksjbskgrbk gsjrgk sjrngkjs nkjsbksjgnksj ",
+        "This is an easy task to do like my mum said... I don't know",
       date: new Date(),
       completed: false,
       flag: "personal",
@@ -84,7 +88,7 @@ const TaskManager = () => {
       date: undefined,
       completed: false,
     });
-    setOpenAddTask(!open);
+    setModals({ ...modals, task: !task });
   };
 
   const removeTask = (id: number) => {
@@ -98,7 +102,10 @@ const TaskManager = () => {
           <Typography variant="h6" className="w-4/5">
             All
           </Typography>
-          <IconButton centerRipple onClick={() => setOpenAddTask(true)}>
+          <IconButton
+            centerRipple
+            onClick={() => setModals({ ...modals, task: true })}
+          >
             <AddCircle fontSize="large" className="text-neutral-700" />
           </IconButton>
           <MoreVert />
@@ -119,9 +126,11 @@ const TaskManager = () => {
       </div>
 
       {/* Add task popup */}
-      {openAddTask ? (
+      {modals.task ? (
         <Backdrop open className="z-10">
-          <ClickAwayListener onClickAway={() => setOpenAddTask(false)}>
+          <ClickAwayListener
+            onClickAway={() => setModals({ ...modals, task: false })}
+          >
             <Paper className="bg-neutral-800 text-white bg-flex flex-col w-11/12 rounded-md place-self-center">
               <Container className="mt-2">
                 <Typography className="mb-4 text-white" variant="h6">
@@ -150,8 +159,46 @@ const TaskManager = () => {
                     <IconButton>
                       <CalendarMonth className="text-white" fontSize="small" />
                     </IconButton>
-                    <IconButton onClick={() => setOpenAddFlag(true)}>
-                      <Flag className="text-white" fontSize="small" />
+                    <IconButton
+                      onClick={() => setModals({ ...modals, flag: true })}
+                      className="relative"
+                    >
+                      <Flag
+                        className={modals.flag ? "text-red-500" : "text-white"}
+                        fontSize="small"
+                      />
+                      {modals.flag ? (
+                        <ClickAwayListener
+                          onClickAway={() =>
+                            setModals({ ...modals, flag: false })
+                          }
+                        >
+                          <Paper className="absolute left-4 top-6 z-10 shadow-sm">
+                            <MenuList>
+                              <MenuItem>
+                                <ListItemIcon>
+                                  <Flag fontSize="small" />
+                                </ListItemIcon>
+                                <Typography variant="inherit">Inbox</Typography>
+                              </MenuItem>
+                              <MenuItem>
+                                <ListItemIcon>
+                                  <Flag fontSize="small" />
+                                </ListItemIcon>
+                                <Typography variant="inherit">MSU</Typography>
+                              </MenuItem>
+                              <MenuItem>
+                                <ListItemIcon>
+                                  <Flag fontSize="small" />
+                                </ListItemIcon>
+                                <Typography variant="inherit" noWrap>
+                                  Personal
+                                </Typography>
+                              </MenuItem>
+                            </MenuList>
+                          </Paper>
+                        </ClickAwayListener>
+                      ) : null}
                     </IconButton>
                     <IconButton>
                       <Inbox className="text-white" fontSize="small" />
@@ -167,34 +214,6 @@ const TaskManager = () => {
             </Paper>
           </ClickAwayListener>
         </Backdrop>
-      ) : null}
-
-      {/* Flags popup */}
-      {openAddFlag ? (
-        <Paper sx={{ width: 230 }}>
-          <MenuList>
-            <MenuItem>
-              <ListItemIcon>
-                <Flag fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="inherit">MSU</Typography>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <Flag fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="inherit">MSU Assignments</Typography>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <Flag fontSize="small" />
-              </ListItemIcon>
-              <Typography variant="inherit" noWrap>
-                Personal
-              </Typography>
-            </MenuItem>
-          </MenuList>
-        </Paper>
       ) : null}
     </>
   );
