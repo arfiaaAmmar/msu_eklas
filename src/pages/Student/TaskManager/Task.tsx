@@ -7,7 +7,7 @@ type TaskProps = {
   description?: string, 
   date?: Date,
   flag?: string,  
-  onDelete: any
+  onDelete?: any
 }
 
 const Task = ({title, description, date, flag, onDelete}:TaskProps) => {
@@ -20,7 +20,7 @@ const Task = ({title, description, date, flag, onDelete}:TaskProps) => {
     flagColor = 'bg-green-500'
   }
   if(flag == 'inbox'){
-    flagColor = 'bg-blue-500'
+    flagColor = 'bg-neutral-400'
   }
 
   return (
@@ -31,17 +31,17 @@ const Task = ({title, description, date, flag, onDelete}:TaskProps) => {
           <div className="flex flex-col gap-2">
             <p className="text-lg leading-5 font-semibold">{title}</p>
             <p className="text-xs">{description}</p>
-            <p className={`bg-red-500 ${flagColor} text-[0.6rem] p-1 w-max rounded-lg`}>
-              {flag}
+            <p className={` ${flagColor} text-[0.6rem] p-1 w-max rounded-lg`}>
+              {flag?.toLocaleUpperCase()}
             </p>
           </div>
         </div>
-        <div className="flex flex-col m-auto justify-end w-1/4 text-right">
-          <CheckBox onClick={onDelete} className="m-auto"/>
+        <div className="flex flex-col w-1/4 text-right">
+          <CheckBox onClick={onDelete} className="ml-auto my-auto" />
           {date == null ? null : (
-            <p className="text-[0.6rem] font-bold text-neutral-500 mt-2">
-              {date.getDate()}/{date.getMonth() + 1}/
-              {date.getFullYear()}
+            <p className="text-[0.6rem] font-bold text-neutral-500 mt-auto ">
+              {date?.getDate()}/{date?.getMonth() + 1}/
+              {date?.getFullYear()}
             </p>
           )}
         </div>

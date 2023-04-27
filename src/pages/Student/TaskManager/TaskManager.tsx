@@ -1,12 +1,14 @@
 import {
   AddCircle,
-  MoreVert,
   CalendarMonth,
+  DoubleArrow,
   Flag,
   Inbox,
-  DoubleArrow,
+  MoreVert,
 } from "@mui/icons-material";
 import {
+  Backdrop,
+  ClickAwayListener,
   Container,
   IconButton,
   Input,
@@ -14,14 +16,15 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useState, useEffect } from "react";
-import { Backdrop, ClickAwayListener } from "@mui/material";
 import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuItem from "@mui/material/MenuItem";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useState } from "react";
 import Task from "./Task";
 
-export type Task = {
+type Task = {
   id: number;
   title: string;
   description?: string;
@@ -44,7 +47,6 @@ const TaskManager = () => {
     description: "",
     date: undefined,
     completed: false,
-    flag: "inbox",
   });
 
   const [tasks, setTasks] = useState<Task[]>([
@@ -85,7 +87,8 @@ const TaskManager = () => {
       id: 0,
       title: "",
       description: "",
-      date: undefined,
+      date: new Date(),
+      flag: "inbox",
       completed: false,
     });
     setModals({ ...modals, task: !task });
@@ -96,7 +99,7 @@ const TaskManager = () => {
   };
 
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="bg-neutral-100 py-2 rounded-lg">
         <div className="flex items-center justify-between gap-3 mx-2">
           <Typography variant="h6" className="w-4/5">
@@ -125,7 +128,6 @@ const TaskManager = () => {
         </ul>
       </div>
 
-      {/* Add task popup */}
       {modals.task ? (
         <Backdrop open className="z-10">
           <ClickAwayListener
@@ -141,7 +143,9 @@ const TaskManager = () => {
                   className="text-white"
                   fullWidth
                   name="title"
-                  onChange={(e) => setTask({ ...task, title: e.target.value })}
+                  onChange={(e: any) =>
+                    setTask({ ...task, title: e.target.value })
+                  }
                   value={task.title}
                 />
                 <Input
@@ -149,11 +153,28 @@ const TaskManager = () => {
                   fullWidth
                   className="text-white"
                   name="description"
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setTask({ ...task, description: e.target.value })
                   }
                   value={task?.description}
                 />
+                <div className="mt-2 flex gap-1">
+                  {task.date ? (
+                    <p className="bg-red-500 text-sm p-1 w-max rounded-lg">
+                      {task.date.getFullYear()}/{task.date.getMonth()}/
+                      {task.date.getDay()}
+                    </p>
+                  ) : null}
+                  {task.flag ? (
+                    <p
+                      className={`${
+                        task.flag == "inbox" ? "bg-red-500" : "bg-green-500"
+                      } text-sm p-1 w-max rounded-lg`}
+                    >
+                      {task.flag}
+                    </p>
+                  ) : null}
+                </div>
                 <div className="flex justify-between items-center">
                   <Box>
                     <IconButton>
@@ -168,9 +189,51 @@ const TaskManager = () => {
                         fontSize="small"
                       />
                       {modals.flag ? (
+                          <ClickAwayListener
+                            onClickAway={() =>
+                              setModals({ ...modals, flag: false })
+                            }
+                          >
+                            <Paper className="absolute left-4 top-6 z-10 shadow-sm">
+                              <MenuList>
+                                <MenuItem>
+                                  <ListItemIcon>
+                                    <Flag fontSize="small" />
+                                  </ListItemIcon>
+                                  <Typography variant="inherit">
+                                    Inbox
+                                  </Typography>
+                                </MenuItem>
+                                <MenuItem>
+                                  <ListItemIcon>
+                                    <Flag fontSize="small" />
+                                  </ListItemIcon>
+                                  <Typography variant="inherit">MSU</Typography>
+                                </MenuItem>
+                                <MenuItem>
+                                  <ListItemIcon>
+                                    <Flag fontSize="small" />
+                                  </ListItemIcon>
+                                  <Typography variant="inherit" noWrap>
+                                    Personal
+                                  </Typography>
+                                </MenuItem>
+                              </MenuList>
+                            </Paper>
+                          </ClickAwayListener>
+                      ) : null}
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setModals({ ...modals, label: true })}
+                    >
+                      <Inbox
+                        fontSize="small"
+                        className={modals.label ? "text-red-500" : "text-white"}
+                      />
+                      {modals.label ? (
                         <ClickAwayListener
                           onClickAway={() =>
-                            setModals({ ...modals, flag: false })
+                            setModals({ ...modals, label: false })
                           }
                         >
                           <Paper className="absolute left-4 top-6 z-10 shadow-sm">
@@ -200,9 +263,6 @@ const TaskManager = () => {
                         </ClickAwayListener>
                       ) : null}
                     </IconButton>
-                    <IconButton>
-                      <Inbox className="text-white" fontSize="small" />
-                    </IconButton>
                   </Box>
                   <Box>
                     <IconButton onClick={AddTask}>
@@ -215,7 +275,7 @@ const TaskManager = () => {
           </ClickAwayListener>
         </Backdrop>
       ) : null}
-    </>
+    </LocalizationProvider>
   );
 };
 
