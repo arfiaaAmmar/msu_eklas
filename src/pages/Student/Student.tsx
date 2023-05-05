@@ -23,9 +23,9 @@ const Student = () => {
   return (
     <>
       <AnimatedPage>
-        <Container className="mt-20 mb-20">
+        <Container className="mt-4">
           <Typography variant="h6">Student</Typography>
-          <TabNav tabs={tabs} />
+          {/* <TabNav tabs={tabs} /> */}
         </Container>
       </AnimatedPage>
     </>
