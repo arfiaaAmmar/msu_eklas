@@ -16,7 +16,7 @@ const Campus = () => {
     <>
       <AnimatePage>
         <TabContext value={page}>
-          <Container sx={{width: "100%"}} >
+          <Container sx={{ width: "100%" }}>
             <Typography variant="h6">Campus</Typography>
             <Tabs
               value={page}
@@ -32,21 +32,15 @@ const Campus = () => {
             >
               <Tab label="Account" value="account" className="text-[0.8rem]" />
               <Tab label="Library" value="library" className="text-[0.8rem]" />
-              <Tab
-                label="Counselling"
-                value="counselling"
-                className="text-[0.8rem]"
-              />
+              <Tab label="Booking" value="booking" className="text-[0.8rem]" />
             </Tabs>
-            <AnimatePage>
-              <TabPanel value="account" className="p-0">
-                <AccountDepartment />
-              </TabPanel>
-            </AnimatePage>
+            <TabPanel value="account" className="p-0">
+              <AccountDepartment />
+            </TabPanel>
             <TabPanel value="library" className="p-0">
               <Library />
             </TabPanel>
-            <TabPanel value="counselling" className="p-0">
+            <TabPanel value="booking" className="p-0">
               <Booking />
             </TabPanel>
           </Container>

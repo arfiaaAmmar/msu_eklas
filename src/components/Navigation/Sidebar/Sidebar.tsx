@@ -1,4 +1,3 @@
-import { Home, School } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { ClickAwayListener } from "@mui/material";
@@ -6,9 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import appRoutes from "../../../routes/routes";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect, ReactElement } from "react";
-import AnimatedPage from "../../AnimatePage";
-import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface SidebarProps {
   sidebar: boolean;

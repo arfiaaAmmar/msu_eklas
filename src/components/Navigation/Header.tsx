@@ -11,9 +11,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
 import Sidebar from "./Sidebar/Sidebar";
-import { Link } from "react-router-dom";
+import { ProfilePic } from "../../assets/images/images";
+import { Button } from "@mui/material";
 
-export const Header = () => {
+type HeaderProps = {
+  handleLogout: () => void
+}
+
+export const Header = ({handleLogout}:HeaderProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [sidebar, setSidebar] = React.useState(false);
 
@@ -28,8 +33,8 @@ export const Header = () => {
 
   return (
     <>
-      <div className="flex fixed top-0 w-full flex-row justify-between p-2 shadow-md bg-neutral-800 z-10">
-        <IconButton onClick={() => setSidebar(true)}>
+      <div className="flex sticky w-full flex-row mb-4 justify-between p-2 shadow-md bg-neutral-800 z-10">
+        <IconButton onClick={() => setSidebar(!sidebar)}>
           <MenuIcon className="text-center text-white my-auto"/>
         </IconButton>
         <input type="search" title="SearchBox" placeholder="Search" className="rounded-2xl h-8 my-auto ml-0 mr-auto bg-neutral-100 p-2"/>
@@ -44,7 +49,7 @@ export const Header = () => {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              <Avatar src="/images/profile_pic.png" alt="" />
+              <Avatar src={ProfilePic} alt="" />
             </IconButton>
           </Tooltip>
         </Box>
@@ -97,7 +102,7 @@ export const Header = () => {
             <ListItemIcon>
               <Logout fontSize="medium" />
             </ListItemIcon>
-            <Link to="/login">Logout</Link>
+            <Button onClick={handleLogout} >Logout</Button>
           </MenuItem>
         </Menu>
       </div>

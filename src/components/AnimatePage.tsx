@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-interface Props {
+type Props = {
   children: React.ReactNode;
 }
 
-function AnimatedPage({ children }: Props) {
+const AnimatePage = ({ children }: Props) => {
   return (
     <motion.div
       variants={{
@@ -22,4 +22,4 @@ function AnimatedPage({ children }: Props) {
   );
 }
 
-export default AnimatedPage;
+export default AnimatePage;

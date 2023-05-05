@@ -8,27 +8,30 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
+import EklasLogo from '../../assets/images/eklas_logo.png'
 // import { useAuth } from "../context/AuthContext";
 
-const Login = () => {
-  const [userMode, setUserMode] = useState("student");
-  const [route, setRoute] = useState()
-  // const { login } = useAuth();
-  const active = "w-2/4 flex items-center justify-evenly border-r border-neutral-300 bg-neutral-300 text-neutral-800"
-  const inactive = "w-2/4 flex items-center justify-evenly border-r border-neutral-300 text-neutral-800"
+type LoginProps = {
+  setLogged: any,
+  setUser: any
+}
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
+const Login = ({setLogged, setUser}:LoginProps) => {
+  const [userMode, setUserMode] = useState("student");
+  const [name, setName] = useState("")
 
   const handleSubmit = () => {
-
+    setUser(() => name)
+    setLogged((prev:any) => !prev)
   }
+
+  const handleChange = (e:any) => {
+    const {value} = e.target
+    setName(() => value)
+  }
+
+  const active = "w-2/4 flex items-center justify-evenly border-r border-neutral-300 bg-neutral-300 text-neutral-800"
+  const inactive = "w-2/4 flex items-center justify-evenly border-r border-neutral-300 text-neutral-800"
 
   return (
     <div className="h-screen ">
@@ -36,7 +39,7 @@ const Login = () => {
       <div className="flex overflow-hidden bg-neutral-800 h-1/4 relative">
         <img
           className="object-contain px-8 pt-6"
-          src="/images/eklas_logo.png"
+          src={EklasLogo}
           alt="msu logo"
         />
       </div>
@@ -82,6 +85,7 @@ const Login = () => {
           fullWidth
           id="email"
           label="Email Address"
+          onChange={handleChange}
           name="email"
           autoComplete="email"
           autoFocus
@@ -94,6 +98,7 @@ const Login = () => {
           label="Password"
           type="password"
           id="password"
+          onChange={handleChange}
           autoComplete="current-password"
         />
         <FormControlLabel
