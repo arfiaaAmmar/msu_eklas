@@ -14,7 +14,16 @@ export type RouteType = {
 };
 
 export type RoomBookingRouteType = {
-  path: string | Partial<Path>
-  images: string[]
+  id?: string
+  name?: string
+  department?: "account" | "library" | "counselling"
+  images?: string[] | Partial<Path>[]
   children?: RoomBookingRouteType[]
+}
+
+export type StatementRouteType = {
+  category: string
+  state: string,
+  subCategory?: StatementRouteType[]
+  image?: string
 }

@@ -1,7 +1,6 @@
 import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import AccountDepartment from "../pages/Campus/AccounDepartment";
 import Campus from "../pages/Campus/Campus";
-import Counselling from "../pages/Campus/Booking";
 import Library from "../pages/Campus/Library";
 import Inbox from '../pages/Inbox/Inbox';
 import Curriculum from "../pages/Student/Curriculum/Curriculum";
@@ -11,6 +10,8 @@ import { RouteType } from "./config";
 import Timetable from "../pages/Student/Curriculum/Timetable/Timetable";
 import CourseRegistration from "../pages/Student/Curriculum/CourseRegistration/CourseRegistration";
 import LearningResources from "../pages/Student/Curriculum/LearningResources/LearningResources";
+import Counselling from "../pages/Campus/Counselling";
+import Booking from "../pages/Campus/Booking/Booking";
 
 const appRoutes: RouteType[] = [
   {
@@ -138,7 +139,7 @@ const appRoutes: RouteType[] = [
   },
   {
     path: "/campus",
-    element: <Campus />,
+    element: <Campus/>,
     state: "campus.default",
     sidebarProps: {
       icon: <AccountBalance />,
@@ -146,33 +147,33 @@ const appRoutes: RouteType[] = [
     },
     children: [
       {
-        path: "campus/account_department",
+        path: "campus/account",
         element: <AccountDepartment />,
-        state: "account_department.default",
+        state: "account.default",
         sidebarProps: {
           displayText: "Account Department"
         },
         children: [
           {
-            path: "campus/account_department/payment",
+            path: "campus/account/payment",
             element: <AccountDepartment />,
-            state: "account_department.payment",
+            state: "account.payment",
             sidebarProps: {
               displayText: "Payment"
             }
           },
           {
-            path: "campus/account_department/payment",
+            path: "campus/account/payment",
             element: <AccountDepartment />,
-            state: "account_department.statement",
+            state: "account.statement",
             sidebarProps: {
               displayText: "Statement"
             }
           },
           {
-            path: "campus/account_department/payment",
+            path: "campus/account/payment",
             element: <AccountDepartment />,
-            state: "account_department.appointments",
+            state: "account.appointments",
             sidebarProps: {
               displayText: "Appointments"
             }
@@ -206,11 +207,11 @@ const appRoutes: RouteType[] = [
         ]
       },
       {
-        path: "campus/counselling",
-        element: <Counselling />,
-        state: "counselling.default",
+        path: "campus/booking",
+        element: <Booking />,
+        state: "booking.default",
         sidebarProps: {
-          displayText: "Counselling"
+          displayText: "Booking"
         }
       }
     ]

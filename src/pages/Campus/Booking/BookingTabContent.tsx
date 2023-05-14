@@ -6,7 +6,7 @@ import { RoomBookingRouteType } from "../../../routes/config";
 type BookingTabContentProps = {
   rooms?: RoomBookingRouteType["children"];
   currentRoom: string | undefined
-  setCurrentRoom: React.Dispatch<React.SetStateAction<string | undefined>>
+  setCurrentRoom: React.Dispatch<React.SetStateAction<string>>
 };
 
 const BookingTabContent = (props: BookingTabContentProps) => {
@@ -17,7 +17,7 @@ const BookingTabContent = (props: BookingTabContentProps) => {
       {props.rooms?.map((room) => (
         <Button
           key={room.id}
-          onClick={() => props.setCurrentRoom(room.id)}
+          onClick={() => props.setCurrentRoom(room.id!)}
           className={`${props.currentRoom == room.id ? 'bg-red-500' : 'bg-neutral-200'} rounded-md px-2 text-sm mx-1 text-neutral-800`}
         >
           {room.name}
