@@ -30,7 +30,7 @@ function App() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           {location.pathname != "/login" ? <Header handleLogout={handleLogout} /> : null}
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/student" element={<Student />}>
                 <Route path="/student/taskmanager" />
                 <Route path="/student/curriculum" />

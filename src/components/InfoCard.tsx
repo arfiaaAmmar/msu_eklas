@@ -1,4 +1,5 @@
 import Carousel from "react-material-ui-carousel";
+import { ProfilePic } from "../assets/images/images";
 
 export const InfoCard = () => {
   return (
@@ -42,16 +43,16 @@ export const InfoCard = () => {
 
 interface News {
   author: String;
-  image?: string;
+  image: any;
   title: String;
   description: String;
   date: Date;
 }
 
-const newsExample: readonly News[] = [
+const newsExample: News[] = [
   {
     author: "Program Manager",
-    image: "images/profile_pic.png",
+    image: {ProfilePic},
     title: "New Info about Program",
     description:
       "I'll be in the neighbourhood this week. Let's grab a bite to eat",
@@ -59,7 +60,7 @@ const newsExample: readonly News[] = [
   },
   {
     author: "Program Manager",
-    image: "images/msu_logo.png",
+    image: {ProfilePic},
     title: "New Info about Program",
     description:
       "I'll be in the neighbourhood this week. Let's grab a bite to eat",
@@ -67,7 +68,7 @@ const newsExample: readonly News[] = [
   },
   {
     author: "Program Manager",
-    image: "images/eklas_logo.png",
+    image: {ProfilePic},
     title: "New Info about Program",
     description:
       "I'll be in the neighbourhood this week. Let's grab a bite to eat",

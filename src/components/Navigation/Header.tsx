@@ -33,7 +33,7 @@ export const Header = ({handleLogout}:HeaderProps) => {
 
   return (
     <>
-      <div className="flex sticky w-full flex-row mb-4 justify-between p-2 shadow-md bg-neutral-800 z-10">
+      <div className="flex fixed top-0 w-full flex-row justify-between p-2 shadow-md bg-neutral-800 z-10">
         <IconButton onClick={() => setSidebar(!sidebar)}>
           <MenuIcon className="text-center text-white my-auto"/>
         </IconButton>

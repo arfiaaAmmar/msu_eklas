@@ -20,10 +20,12 @@ const Tab: React.FC<TabProps> = ({ label, active = false, onClick }) => {
 };
 
 export type TabNavProps = {
-  tabs: { label: string; path:To; content: React.ReactNode }[];
+  tabs: { label: string; path:To; content?: React.ReactNode }[];
+  contentPosition: "top" | "bottom"
+  className?: string
 };
 
-const TabNav: React.FC<TabNavProps> = ({ tabs }) => {
+const TabNav: React.FC<TabNavProps> = ({ tabs, contentPosition, className }) => {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate()
 
@@ -33,7 +35,8 @@ const TabNav: React.FC<TabNavProps> = ({ tabs }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
+      { contentPosition == 'top' ? <div className="mt-4">{tabs[activeTab].content}</div> : null}
       <div className="flex gap-4">
         {tabs.map((tab, index) => (
           <Tab
@@ -44,7 +47,7 @@ const TabNav: React.FC<TabNavProps> = ({ tabs }) => {
           />
         ))}
       </div>
-      <div className="mt-4">{tabs[activeTab].content}</div>
+      { contentPosition == 'bottom' ? <div className="mt-4">{tabs[activeTab].content}</div> : null }
     </div>
   );
 };

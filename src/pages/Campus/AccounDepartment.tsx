@@ -8,7 +8,6 @@ import { FileDownload } from "@mui/icons-material";
 const AccountDepartment = () => {
   return (
     <>
-      <p className="font-semibold text-lg">Fee Statements & Payments</p>
       <div className="bg-neutral-800 p-4 rounded-md mt-2 w-full">
         <div className="flex gap-2">
           <ReceiptLongIcon className="text-white" />

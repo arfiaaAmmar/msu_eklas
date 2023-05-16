@@ -6,20 +6,21 @@ import Booking from "./Booking/Booking";
 import { useState } from "react";
 import { TabPanel, TabContext } from "@mui/lab";
 
+
 const Campus = () => {
-  const [page, setPage] = useState("account");
+  const [tab, setTab] = useState("account");
   const handleTab = (event: React.SyntheticEvent, newValue: string) => {
-    setPage(newValue);
+    setTab(newValue);
   };
 
   return (
     <>
       <AnimatePage>
-        <TabContext value={page}>
-          <Container sx={{ width: "100%" }}>
+        <TabContext value={tab}>
+          <Container className="mt-20 mb-20">
             <Typography variant="h6">Campus</Typography>
             <Tabs
-              value={page}
+              value={tab}
               onChange={handleTab}
               textColor="primary"
               variant="scrollable"

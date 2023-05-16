@@ -2,6 +2,7 @@ import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ActionButton from "./ActionButton/ActionButton";
+import { Button } from "@mui/material";
 
 const Navbar = () => {
   const [page, setPage] = useState('/home')
@@ -11,6 +12,7 @@ const Navbar = () => {
     <>
       <div className="fixed bottom-2 w-full shadow-2xl">
         <div className="flex bg-neutral-800 justify-evenly h-16 mx-2 mb-auto shadow-lg shadow-white rounded-2xl">
+          
           <Link
             key={0}
             to="/home"
