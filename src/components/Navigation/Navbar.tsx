@@ -1,12 +1,13 @@
 import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ActionButton from "./ActionButton/ActionButton";
 import { Button } from "@mui/material";
 
 const Navbar = () => {
   const [page, setPage] = useState('/home')
   const [actionBtn, setActionBtn] = useState(false);
+  const location = useLocation()
 
   return (
     <>
@@ -22,12 +23,12 @@ const Navbar = () => {
             <Home
               fontSize="medium"
               className={`m-auto ${
-                page == '/home' ? "text-red-600" : "text-white font"
+                location.pathname.includes('/home') ? "text-red-600" : "text-white font"
               }`}
             />
             <p
               className={`${
-                page == '/home' ? "text-red-600 font-bold" : "text-white font-light"
+                location.pathname.includes('/home') ? "text-red-600 font-bold" : "text-white font-light"
               } text-[0.65rem] text-center`}
             >
               Home
@@ -42,12 +43,12 @@ const Navbar = () => {
             <School
               fontSize="medium"
               className={`m-auto ${
-                page == '/student' ? "text-red-600" : "text-white font"
+                location.pathname.includes('/student') ? "text-red-600" : "text-white font"
               }`}
             />
             <p
               className={`${
-                page == '/student' ? "text-red-600 font-bold" : "text-white font-light"
+                location.pathname.includes('/student') ? "text-red-600 font-bold" : "text-white font-light"
               } text-[0.65rem] text-center`}
             >
               Student
@@ -62,11 +63,11 @@ const Navbar = () => {
           >
             <AccountBalance
               fontSize="medium"
-              className={`m-auto ${page == '/campus' ? "text-red-600" : "text-white"}`}
+              className={`m-auto ${location.pathname.includes('/campus') ? "text-red-600" : "text-white"}`}
             />
             <p
               className={`${
-                page == '/campus' ? "text-red-600 font-bold" : "text-white font-light"
+                location.pathname.includes('/campus') ? "text-red-600 font-bold" : "text-white font-light"
               } text-[0.65rem] text-center`}
             >
               Campus
@@ -80,11 +81,11 @@ const Navbar = () => {
           >
             <Email
               fontSize="medium"
-              className={`m-auto ${page == '/inbox' ? "text-red-600" : "text-white"}`}
+              className={`m-auto ${location.pathname.includes('/inbox') ? "text-red-600" : "text-white"}`}
             />
             <p
               className={`${
-                page == '/mail' ? "text-red-600 font-bold" : "text-white font-light"
+                location.pathname.includes('/inbox') ? "text-red-600 font-bold" : "text-white font-light"
               } text-[0.65rem] text-center`}
             >
               Inbox
