@@ -6,6 +6,7 @@ import * as React from "react";
 import appRoutes from "../../../routes/routes";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { ProfilePic } from "../../../assets/images/images";
 
 interface SidebarProps {
   sidebar: boolean;
@@ -25,7 +26,7 @@ export default function Sidebar({ setSidebar }: SidebarProps) {
           className="m-auto mt-4 w-3/4"
         />
         <div className="flex py-6 gap-4 px-2 items-center">
-          <Avatar src="/images/profile_pic.png" alt="" />
+          <Avatar src={ProfilePic} alt="" />
           <div>
             <p className="font-bold text-white text-lg">Ammar Hazim</p>
             <p className="text-white text-sm">012020070202</p>
