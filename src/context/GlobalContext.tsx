@@ -1,13 +1,29 @@
-import * as React from "react";
+import { useState, createContext, useContext } from "react";
 
-interface IGlobalContextProps {
-  user: any;
-  setUser: (user: any) => void;
+export type UserType = {
+  mode: "student" | "lecturer"
+  username: string
+  password: string
+  email: string
 }
 
-export const GlobalContext = React.createContext<IGlobalContextProps>({
-  user: {},
+interface IGlobalContextProps {
+  user: UserType
+  setUser: (user: UserType) => void;
+  logged: boolean
+  setLogged: (logged: boolean) => void
+}
+
+export const GlobalContext = createContext<IGlobalContextProps>({
+  user: {
+    mode: "student",
+    username: "",
+    password: "",
+    email: ""
+  },
   setUser: () => {},
+  logged: false,
+  setLogged: () => {}
 });
 
 interface Props {
@@ -15,14 +31,21 @@ interface Props {
 }
 
 export const GlobalContextProvider = ({ children }: Props) => {
-  const [currentUser, setCurrentUser] = React.useState({});
-  
+  const [user, setUser] = useState<UserType>({
+    mode: "student",
+    username: "",
+    password: "",
+    email: ""
+  });
+  const [logged, setLogged] = useState(true)
 
   return (
     <GlobalContext.Provider
       value={{
-        user: currentUser,
-        setUser: setCurrentUser,
+        user: user,
+        setUser: setUser,
+        logged: logged,
+        setLogged: setLogged
       }}
     >
       {children}
@@ -30,7 +53,7 @@ export const GlobalContextProvider = ({ children }: Props) => {
   );
 };
 
-export const useGlobalContext = () => React.useContext(GlobalContext);
+export const useGlobalContext = () => useContext(GlobalContext);
 
 
 

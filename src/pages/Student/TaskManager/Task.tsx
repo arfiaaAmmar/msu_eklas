@@ -30,7 +30,7 @@ const Task = ({title, description, date, flag, onDelete}:TaskProps) => {
           <div className="bg-red-600 w-1 rounded-sm"></div>
           <div className="flex flex-col gap-2">
             <p className="text-lg leading-5 font-semibold">{title}</p>
-            <p className="text-xs">{description}</p>
+          <p className="text-xs">{description}</p>
             <p className={` ${flagColor} text-[0.6rem] p-1 w-max rounded-lg`}>
               {flag?.toLocaleUpperCase()}
             </p>

@@ -1,6 +1,6 @@
 import AnimatePage from "../../components/AnimatePage";
 import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
-import Library from "./Library";
+import Library from "./Library/Library";
 import AccountDepartment from "./AccounDepartment";
 import Booking from "./Booking/Booking";
 import { useState } from "react";
@@ -31,9 +31,9 @@ const Campus = () => {
                 },
               }}
             >
-              <Tab label="Account" value="account" className="text-[0.8rem]" />
-              <Tab label="Library" value="library" className="text-[0.8rem]" />
-              <Tab label="Booking" value="booking" className="text-[0.8rem]" />
+              <Tab label="Account" value="account" />
+              <Tab label="Library" value="library"  />
+              <Tab label="Booking" value="booking" />
             </Tabs>
             <TabPanel value="account" className="p-0">
               <AccountDepartment />

@@ -7,6 +7,7 @@ type BookingTabContentProps = {
   rooms?: RoomBookingRouteType["children"];
   currentRoom: string | undefined
   setCurrentRoom: React.Dispatch<React.SetStateAction<string>>
+  handleBooking: () => void
 };
 
 const BookingTabContent = (props: BookingTabContentProps) => {
@@ -42,7 +43,7 @@ const BookingTabContent = (props: BookingTabContentProps) => {
       />
       <button
         type="submit"
-        // onClick={props.handleBooking}
+        onClick={props.handleBooking}
         className="bg-red-600 text-white px-2 rounded-md mx-1"
       >
         Book Now

@@ -1,7 +1,7 @@
 import { AccountBalance, Email, Home, School } from "@mui/icons-material";
 import AccountDepartment from "../pages/Campus/AccounDepartment";
 import Campus from "../pages/Campus/Campus";
-import Library from "../pages/Campus/Library";
+import Library from "../pages/Campus/Library/Library";
 import Inbox from '../pages/Inbox/Inbox';
 import Curriculum from "../pages/Student/Curriculum/Curriculum";
 import Student from "../pages/Student/Student";

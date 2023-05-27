@@ -31,8 +31,8 @@ const Student = () => {
                   },
                 }}
               >
-                <Tab label="Task Manager" value="task_manager" className="text-[0.8rem]" />
-                <Tab label="Curriculum" value="curriculum" className="text-[0.8rem]" />
+                <Tab label="Task Manager" value="task_manager" />
+                <Tab label="Curriculum" value="curriculum" />
               </Tabs>
               <TabPanel value="task_manager" className="p-0">
                 <TaskManager />

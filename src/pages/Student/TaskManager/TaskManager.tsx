@@ -14,9 +14,10 @@ import {
   Input,
   MenuList,
   Paper,
+  Box,
   Typography,
+  List,
 } from "@mui/material";
-import Box from "@mui/material/Box";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -100,8 +101,8 @@ const TaskManager = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="bg-neutral-100 py-2 rounded-lg">
-        <div className="flex items-center justify-between gap-3 mx-2">
+      <Box className="bg-neutral-100 py-2 rounded-lg">
+        <Box className="flex items-center justify-between gap-3 mx-2">
           <Typography variant="h6" className="w-4/5">
             All
           </Typography>
@@ -112,8 +113,8 @@ const TaskManager = () => {
             <AddCircle fontSize="large" className="text-neutral-700" />
           </IconButton>
           <MoreVert />
-        </div>
-        <ul>
+        </Box>
+        <List>
           {tasks.map((task) => (
             <Task
               key={task.id}
@@ -125,8 +126,8 @@ const TaskManager = () => {
               onDelete={() => removeTask(task.id)}
             />
           ))}
-        </ul>
-      </div>
+        </List>
+      </Box>
 
       {modals.task ? (
         <Backdrop open className="z-10">
@@ -158,118 +159,113 @@ const TaskManager = () => {
                   }
                   value={task?.description}
                 />
-                <div className="mt-2 flex gap-1">
+                <Box className="mt-2 flex gap-1">
                   {task.date ? (
-                    <p className="bg-red-500 text-sm p-1 w-max rounded-lg">
-                      {task.date.getFullYear()}/{task.date.getMonth()}/
-                      {task.date.getDay()}
-                    </p>
+                    <Typography className="bg-red-500 text-sm p-1 w-max rounded-lg">
+                      {new Date(task.date).toLocaleDateString("en-GB")}
+                    </Typography>
                   ) : null}
                   {task.flag ? (
-                    <p
+                    <Typography
                       className={`${
                         task.flag == "inbox" ? "bg-red-500" : "bg-green-500"
                       } text-sm p-1 w-max rounded-lg`}
                     >
                       {task.flag}
-                    </p>
+                    </Typography>
                   ) : null}
-                </div>
-                <div className="flex justify-between items-center">
-                  <Box>
-                    <IconButton>
-                      <CalendarMonth className="text-white" fontSize="small" />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setModals({ ...modals, flag: true })}
-                      className="relative"
-                    >
-                      <Flag
-                        className={modals.flag ? "text-red-500" : "text-white"}
-                        fontSize="small"
-                      />
-                      {modals.flag ? (
-                          <ClickAwayListener
-                            onClickAway={() =>
-                              setModals({ ...modals, flag: false })
-                            }
-                          >
-                            <Paper className="absolute left-4 top-6 z-10 shadow-sm">
-                              <MenuList>
-                                <MenuItem>
-                                  <ListItemIcon>
-                                    <Flag fontSize="small" />
-                                  </ListItemIcon>
-                                  <Typography variant="inherit">
-                                    Inbox
-                                  </Typography>
-                                </MenuItem>
-                                <MenuItem>
-                                  <ListItemIcon>
-                                    <Flag fontSize="small" />
-                                  </ListItemIcon>
-                                  <Typography variant="inherit">MSU</Typography>
-                                </MenuItem>
-                                <MenuItem>
-                                  <ListItemIcon>
-                                    <Flag fontSize="small" />
-                                  </ListItemIcon>
-                                  <Typography variant="inherit" noWrap>
-                                    Personal
-                                  </Typography>
-                                </MenuItem>
-                              </MenuList>
-                            </Paper>
-                          </ClickAwayListener>
-                      ) : null}
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setModals({ ...modals, label: true })}
-                    >
-                      <Inbox
-                        fontSize="small"
-                        className={modals.label ? "text-red-500" : "text-white"}
-                      />
-                      {modals.label ? (
-                        <ClickAwayListener
-                          onClickAway={() =>
-                            setModals({ ...modals, label: false })
-                          }
-                        >
-                          <Paper className="absolute left-4 top-6 z-10 shadow-sm">
-                            <MenuList>
-                              <MenuItem>
-                                <ListItemIcon>
-                                  <Flag fontSize="small" />
-                                </ListItemIcon>
-                                <Typography variant="inherit">Inbox</Typography>
-                              </MenuItem>
-                              <MenuItem>
-                                <ListItemIcon>
-                                  <Flag fontSize="small" />
-                                </ListItemIcon>
-                                <Typography variant="inherit">MSU</Typography>
-                              </MenuItem>
-                              <MenuItem>
-                                <ListItemIcon>
-                                  <Flag fontSize="small" />
-                                </ListItemIcon>
-                                <Typography variant="inherit" noWrap>
-                                  Personal
-                                </Typography>
-                              </MenuItem>
-                            </MenuList>
-                          </Paper>
-                        </ClickAwayListener>
-                      ) : null}
-                    </IconButton>
-                  </Box>
+                </Box>
+                <Box className="flex justify-between items-center">
+                  <IconButton>
+                    <CalendarMonth className="text-white" fontSize="small" />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => setModals({ ...modals, flag: true })}
+                    className="relative"
+                  >
+                    <Flag
+                      className={modals.flag ? "text-red-500" : "text-white"}
+                      fontSize="small"
+                    />
+                    {modals.flag ? (
+                      <ClickAwayListener
+                        onClickAway={() =>
+                          setModals({ ...modals, flag: false })
+                        }
+                      >
+                        <Paper className="absolute left-4 top-6 z-10 shadow-sm">
+                          <MenuList>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit">Inbox</Typography>
+                            </MenuItem>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit">MSU</Typography>
+                            </MenuItem>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit" noWrap>
+                                Personal
+                              </Typography>
+                            </MenuItem>
+                          </MenuList>
+                        </Paper>
+                      </ClickAwayListener>
+                    ) : null}
+                  </IconButton>
+                  <IconButton
+                    onClick={() => setModals({ ...modals, label: true })}
+                  >
+                    <Inbox
+                      fontSize="small"
+                      className={modals.label ? "text-red-500" : "text-white"}
+                    />
+                    {modals.label ? (
+                      <ClickAwayListener
+                        onClickAway={() =>
+                          setModals({ ...modals, label: false })
+                        }
+                      >
+                        <Paper className="absolute left-4 top-6 z-10 shadow-sm">
+                          <MenuList>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit">Inbox</Typography>
+                            </MenuItem>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit">MSU</Typography>
+                            </MenuItem>
+                            <MenuItem>
+                              <ListItemIcon>
+                                <Flag fontSize="small" />
+                              </ListItemIcon>
+                              <Typography variant="inherit" noWrap>
+                                Personal
+                              </Typography>
+                            </MenuItem>
+                          </MenuList>
+                        </Paper>
+                      </ClickAwayListener>
+                    ) : null}
+                  </IconButton>
                   <Box>
                     <IconButton onClick={AddTask}>
                       <DoubleArrow className="text-red-600" fontSize="large" />
                     </IconButton>
                   </Box>
-                </div>
+                </Box>
               </Container>
             </Paper>
           </ClickAwayListener>

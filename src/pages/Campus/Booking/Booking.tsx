@@ -7,23 +7,25 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import { TabContext, TabPanel } from "@mui/lab";
 import BookingTabContent from "./BookingTabContent";
 import { roomsRoute } from "../../../routes/roomsRoute";
 import { RoomBookingRouteType } from "../../../routes/config";
+import useFetch from "../../../hooks/useFetch";
+import usePostData from "../../../hooks/usePost";
 
 const account = roomsRoute[0];
 const library = roomsRoute[1];
 const counselling = roomsRoute[2];
 
-type BookingType = {
+export type BookingType = {
   id: string;
   name: string;
   department: RoomBookingRouteType["department"];
   images: string[];
-  description: string;
+  description: string; 
   bookingDate: Date | undefined;
   status: true;
 };
@@ -31,61 +33,31 @@ type BookingType = {
 const Booking = () => {
   const [tab, setTab] = useState("account");
   const [currentRoom, setCurrentRoom] = useState<string>(
-    "account_room1"
+    "library_room1"
   );
-  const [bookings, setBookings] = useState<BookingType[]>([
-    {
-      id: "account_room2",
-      name: "Room 2",
-      department: "account",
-      images: [
-        "https://thumbs.dreamstime.com/b/room-chairs-boxes-tailor-dummy-moving-house-172558981.jpg",
-        "https://thumbs.dreamstime.com/b/room-chairs-boxes-tailor-dummy-moving-house-172558981.jpg",
-        "https://thumbs.dreamstime.com/b/room-chairs-boxes-tailor-dummy-moving-house-172558981.jpg",
-      ],
-      description: "For final exam study",
-      bookingDate: new Date(),
-      status: true,
-    },
-    {
-      id: "library_room2",
-      name: "Room 2",
-      department: "library",
-      images: [
-        "https://thumbs.dreamstime.com/b/room-chairs-boxes-tailor-dummy-moving-house-172558981.jpg",
-        "https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg",
-      ],
-      description: "For video production",
-      bookingDate: new Date(),
-      status: true,
-    },
-  ]);
+  const [selectedRoom, setSelectedRoom] = useState<BookingType>()
 
-  // const handleTab = (e: any, newPage: string) => {
-  //   if (booking?.bookingDate == null) return;
-  //   setBoookings([
-  //     ...bookings,
-  //     {
-  //       id: bookings.length + 1,
-  //       description: task?.description,
-  //       date: new Date(),
-  //       flag: "inbox",
-  //       completed: false,
-  //     },
-  //   ]);
+  //For fetch API purposes
+  const [bookedRoomsData, setBookedRoomsData] = useState<BookingType[]>([])
 
-  //   setTask({
-  //     id: 0,
-  //     title: "",
-  //     description: "",
-  //     date: new Date(),
-  //     flag: "inbox",
-  //     completed: false,
-  //   });
-  //   setModals({ ...modals, task: !task });
-  // };
+  const { data, isLoading, error } = useFetch("http://localhost:3000/bookings")
 
-  const addBooking = () => {};
+  useEffect(() => {
+    const fetchBookedRoomsData = () => {
+      if (data && Array.isArray(data) && data.length > 0) {
+        setBookedRoomsData(data);
+      }
+      if (isLoading) return <p>Loading ...</p>;
+      if (error) return <p>Error: {error}</p>;
+      if (!Array.isArray(data)) return <p>Data is not an array</p>;
+    }
+
+    fetchBookedRoomsData()
+  }, [data])
+
+  const addBooking = () => {
+    
+  };
 
   const deleteBooking = () => {};
 
@@ -155,19 +127,19 @@ const Booking = () => {
               label="Account"
               value="account"
               onClick={() => setCurrentRoom("account_room1")}
-              className="text-neutral-50 text-[0.8rem]"
+              className="text-neutral-50"
             />
             <Tab
               label="Library"
               value="library"
               onClick={() => setCurrentRoom("library_room1")}
-              className="text-neutral-50 text-[0.8rem]"
+              className="text-neutral-50"
             />
             <Tab
               label="Counselling"
               value="counselling"
               onClick={() => setCurrentRoom("counselling_room1")}
-              className="text-neutral-50 text-[0.8rem]"
+              className="text-neutral-50"
             />
           </Tabs>
           <TabPanel value="account" className="p-0">
@@ -175,6 +147,7 @@ const Booking = () => {
               rooms={account.children}
               currentRoom={currentRoom}
               setCurrentRoom={setCurrentRoom}
+              handleBooking={addBooking}
             />
           </TabPanel>
           <TabPanel value="library" className="p-0">
@@ -182,6 +155,7 @@ const Booking = () => {
               rooms={library.children}
               currentRoom={currentRoom}
               setCurrentRoom={setCurrentRoom}
+              handleBooking={addBooking}
             />
           </TabPanel>
           <TabPanel value="counselling" className="p-0">
@@ -189,6 +163,7 @@ const Booking = () => {
               rooms={counselling.children}
               currentRoom={currentRoom}
               setCurrentRoom={setCurrentRoom}
+              handleBooking={addBooking}
             />
           </TabPanel>
         </div>
@@ -201,7 +176,7 @@ const Booking = () => {
         <Typography className="text-neutral-50 p-4 text-left">
           Booked roomsRoute will be listed here
         </Typography>
-        {bookings.map((booking, index) => (
+        {bookedRoomsData.map((booking, index) => (
           <div className="flex gap-2 bg-neutral-700 m-2 rounded-md">
             <div className="w-1/4 overflow-hidden rounded-l-md">
               <img
